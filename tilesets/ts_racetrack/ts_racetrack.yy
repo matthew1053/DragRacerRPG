@@ -1,0 +1,41 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"ts_racetrack",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":8,
+    "SerialiseWidth":7,
+    "TileCompressedData":[
+      -17,0,4,8,3,2,9,-3,0,4,8,3,2,9,-10,0,4,33,55,55,34,-9,0,-3,29,-2,0,
+    ],
+    "TileDataFormat":1,
+  },
+  "name":"ts_racetrack",
+  "out_columns":7,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"Tile Sets",
+    "path":"folders/Tile Sets.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"spr_racetrack",
+    "path":"sprites/spr_racetrack/spr_racetrack.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":60,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":60,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":56,
+}
