@@ -41,13 +41,43 @@ switch button_id
                 global.tournament_race += 1;
             }
             
-            if global.tournament_race == 1 {
-                global.tournament_start = true;
-            }
-        
             if global.tournament_finish {
                 global.tournament_race = 1;
                 global.tournament_finish = false;
+            }
+            
+            // Checking not tournament start helps set enemy list before first race
+            if global.tournament_race == 1 && !global.tournament_start {
+                global.tournament_start = true;
+                
+                // Randomize enemy list
+                // Build enemy list
+                var total_cars = sprite_get_number(spr_cars);
+                
+                // Make sure the list is empty first
+                global.enemy_selection_list = [];
+                
+                for (var i = 0; i < global.enemy_count; i++) {
+                    var random_enemy = irandom(total_cars - 1);
+                
+                    // Reroll if it’s the player car or already chosen
+                    while (random_enemy == global.car_selection || array_contains(global.enemy_selection_list, random_enemy)) {
+                        random_enemy = irandom(total_cars - 1);
+                    }
+                
+                    // Add to list
+                    array_push(global.enemy_selection_list, random_enemy);
+                }
+                
+                // Store current position
+                var obj_x = obj_enemy_car.x;
+                var obj_y = obj_enemy_car.y;
+                
+                // Destroy the old instance
+                instance_destroy(obj_enemy_car);
+                
+                // Recreate a new instance at the same location
+                instance_create_layer(obj_x, obj_y, "Instances", obj_enemy_car);
             }
         }
     
@@ -69,7 +99,7 @@ switch button_id
         layer_set_visible("LayerMainMenu", false);
         layer_set_visible("LayerUpgradeMenu", true);
         layer_set_visible("HUD", false);
-        layer_set_visible("RaceFinished", false);
+        //layer_set_visible("RaceFinished", false);
 	    break;
 	
 	case 3: // Quit
@@ -89,14 +119,16 @@ switch button_id
         layer_set_visible("HUD", false);
         break;
     case 6: // Menu Button on HUD
-        layer_set_visible("LayerMainMenu", true);
-        layer_set_visible("LayerUpgradeMenu", false);
-        layer_set_visible("HUD", false);
-        
-    
-        if global.finish {global.finish = false};
-            
-        layer_set_visible("RaceFinished", false);
-        
-        break;
+        //show_debug_message("finish " + string(global.finish) + " tournament finish: " + string(global.tournament_finish));
+        //if global.finish {
+            //layer_set_visible("LayerMainMenu", true);
+            //layer_set_visible("LayerUpgradeMenu", false);
+            //layer_set_visible("HUD", false);
+            //
+        //
+            //if global.finish {global.finish = false};
+                //
+            //layer_set_visible("RaceFinished", false);
+        //}
+        //break;
 }

@@ -19,7 +19,7 @@ gear_max_speed = gear_speed_thresholds[0];
 
 gear_accel_multipliers = [1.0, 0.6, 0.4, 0.2]; // scaled per gear
 
-shift_delay = 60;
+shift_delay = 80;
 shifting = false;
 shift_timer = 0;
 // -----------------------------------------------------------------------
@@ -29,5 +29,4 @@ start_x = x;
 
 car_friction = 0.05;
 
-//TODO: Figure out how to not have this reset every time I pause the game
-//obj_enemy_car.image_index = irandom(sprite_get_number(obj_enemy_car.sprite_index) - 1);
+obj_enemy_car.image_index = global.enemy_selection_list[global.tournament_race - 1];

@@ -39,3 +39,5 @@ car_max_acceleration = 0.2;
 car_friction = 0.05;
 
 winner = false;
+
+obj_car.image_index = global.car_selection;

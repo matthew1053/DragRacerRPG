@@ -2,7 +2,7 @@
 // You can write your code in this editor
 if global.finish && !global.tournament_finish {
     global.race_queued = true;
-    layer_set_visible("RaceFinished", false);
+    //layer_set_visible("RaceFinished", false);
     var start_x = obj_car.start_x;
     var start_y = obj_car.start_y;
     instance_destroy(obj_car);

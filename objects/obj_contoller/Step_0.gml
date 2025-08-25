@@ -2,7 +2,6 @@
 // You can write your code in this editor
 if (global.countdown_timer >= -30 && global.ready) {
 	
-	
 	if (global.countdown_timer == 180) {
 		global.countdown_text = "3"
 	} else if (global.countdown_timer == 120) {
@@ -60,3 +59,38 @@ switch (global.tournament_race) {
         obj_enemy_car.car_acceleration = global.enemy_accel * (1 + global.enemy_accel_scale[3]);
         break;
 }
+
+
+
+// Smooth displayed speed
+displayed_speed = lerp(displayed_speed, obj_car.car_speed, speed_smoothing);
+
+// --- TACHOMETER RPM based on current gear ---
+var gear_min = (obj_car.gear - 1) * obj_car.gear_speed_increment;
+var gear_max = obj_car.gear_max_speed;
+var gear_range = gear_max - gear_min;
+
+// Progress through current gear (0..1)
+var gear_progress = clamp((displayed_speed - gear_min) / gear_range, 0, 1);
+
+// Map progress to RPM
+current_rpm = gear_progress * max_rpm;
+
+// Shift ready flag
+obj_car.shift_ready = (current_rpm >= ideal_shift_rpm);
+
+
+// Speed Needle shake --------------------------------------------------
+// Reset by default
+needle_jitter = 0;
+
+// Shift shake (only if not in last gear)
+if (obj_car.shift_ready && obj_car.gear < obj_car.max_gear) {
+    needle_jitter = irandom_range(-2, 2); // 2° of wiggle
+}
+
+// Max speed shake
+if (obj_car.car_speed >= obj_car.car_max_speed - .05) { // almost max
+    needle_jitter = irandom_range(-2, 2);
+}
+//------------------------------------------------------------------------

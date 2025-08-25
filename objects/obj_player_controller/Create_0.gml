@@ -13,6 +13,7 @@ global.acceleration_upgrade_amount = 0.001;
 
 // Player
 global.player_money = 0;
+global.car_selection = 0; // this variable holds the array index of the selected user car
 
 // Speed multiplier for display purposes
 global.mph_multiplier = 8.5

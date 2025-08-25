@@ -8,6 +8,7 @@ if !global.finish {
     if obj_enemy_car.car_finish {
         obj_car.winner = false;
         global.tournament_finish = true;
+        global.tournament_selected = false;
         if global.tournament_race == 3 { // Third Place
             global.player_money += global.prize_money[2];
         }
@@ -19,8 +20,10 @@ if !global.finish {
         if global.tournament_race == 4 {
             global.player_money += global.prize_money[0]; // First Place
             global.tournament_finish = true;
+            global.tournament_selected = false;
             //global.tournament_selection = 0;
         }
     }
-    layer_set_visible("RaceFinished", true);
+    show_debug_message("Is tournament: " + string(global.tournament_selected));
+    //layer_set_visible("RaceFinished", true);
 }

@@ -1,6 +1,5 @@
 /// @description Insert description here
 // You can write your code in this editor
-
 // Upgrade Menu
 var money_id = layer_text_get_id("LayerUpgradeMenu", "MoneyText");
 var speed_id = layer_text_get_id("LayerUpgradeMenu", "SpeedUpgradeCost");
@@ -34,12 +33,6 @@ var money_hud = "$" + string(global.player_money);
 
 layer_text_text(money_hud_id, money_hud);
 
-// Race Finished HUD
-var finished_id = layer_text_get_id("RaceFinished", "FinishedText");
-var finished_next_race_id = layer_text_get_id("RaceFinished", "NextRaceText");
-
-var finished = "";
-var finished_next_race = "";
 
 // Tournament Menu
 var tournament_type_id = layer_text_get_id("LayerTournamentMenu", "RaceTypeText");
@@ -83,47 +76,6 @@ layer_text_text(third_place_id, third_place);
 //var child_1 = flexpanel_node_get_child(my_panel, "DisplayPanel");
 //var next_text = flexpanel_node_get_child(child_1, "NextText");
 
-if global.finish {
-    global.tournament_selected = false;
-    global.tournament_start = false;
-    
-    if obj_car.winner {
-        if global.tournament_finish {
-            finished = "First Place!";
-            finished_next_race = "You won $" + string(global.prize_money[0]);
-            //global.tournament_start = false;
-            //flexpanel_node_style_set_margin(next_text, flexpanel_edge.top, 0);
-        } else {
-            finished = "Winner!";
-            finished_next_race = "Tap anywhere to start next race";
-            //flexpanel_node_style_set_margin(next_text, flexpanel_edge.top, 40);
-        }
-    } else {
-        //global.tournament_start = false;
-        switch (global.tournament_race) {
-            case 1:
-                finished = "Last Place";
-                finished_next_race = "You won nothing. Try again.";
-                break;
-            case 2:
-                finished = "4th Place";
-                finished_next_race = "You won nothing. Try again.";
-                break;
-            case 3:
-                finished = "3rd Place";
-                finished_next_race = "You won $" + string(global.prize_money[2]);
-                break;
-            case 4:
-                finished = "2nd Place";
-                finished_next_race = "You won $" + string(global.prize_money[1]);
-                break;
-        }
-        //flexpanel_node_style_set_margin(next_text, flexpanel_edge.top, 0);
-    }
-}
-
-layer_text_text(finished_id, finished);
-layer_text_text(finished_next_race_id, finished_next_race);
 
 //flexpanel_node_
 //flexpanel_node_style_set_margin(_node, flexpanel_edge.top, 0);

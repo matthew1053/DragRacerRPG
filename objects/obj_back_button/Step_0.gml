@@ -22,9 +22,9 @@ for (var i = 0; i < 5; i++) {
 
 // Update visual state using image_alpha
 if global.tournament_selection == 1 {
-    image_alpha = 0.5;
+    image_alpha = 0.25;
 } else if (pressed) {
-    image_alpha = 0.5;
+    image_alpha = 0.25;
 } else {
     image_alpha = 1;
 }
