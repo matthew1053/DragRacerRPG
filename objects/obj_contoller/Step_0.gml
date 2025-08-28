@@ -65,32 +65,21 @@ switch (global.tournament_race) {
 // Smooth displayed speed
 displayed_speed = lerp(displayed_speed, obj_car.car_speed, speed_smoothing);
 
-// --- TACHOMETER RPM based on current gear ---
-var gear_min = (obj_car.gear - 1) * obj_car.gear_speed_increment;
-var gear_max = obj_car.gear_max_speed;
-var gear_range = gear_max - gear_min;
+// Current gear index
+var g = obj_car.gear - 1;
 
-// Progress through current gear (0..1)
-var gear_progress = clamp((displayed_speed - gear_min) / gear_range, 0, 1);
+// Top and bottom speed for this gear
+var gear_min_speed = 0;
+if (obj_car.gear > 1) gear_min_speed = obj_car.car_max_speed / obj_car.gear_ratios[g - 1];
+var gear_max_speed = obj_car.car_max_speed / obj_car.gear_ratios[g];
 
-// Map progress to RPM
-current_rpm = gear_progress * max_rpm;
+// Gear progress (0..1)
+var gear_progress = clamp((displayed_speed - gear_min_speed) / (gear_max_speed - gear_min_speed), 0, 1);
+
+// Map to RPM
+current_rpm = 1000 + gear_progress * (obj_car.max_rpm - 1000);
+current_rpm = clamp(current_rpm, 1000, obj_car.max_rpm);
 
 // Shift ready flag
-obj_car.shift_ready = (current_rpm >= ideal_shift_rpm);
-
-
-// Speed Needle shake --------------------------------------------------
-// Reset by default
-needle_jitter = 0;
-
-// Shift shake (only if not in last gear)
-if (obj_car.shift_ready && obj_car.gear < obj_car.max_gear) {
-    needle_jitter = irandom_range(-2, 2); // 2° of wiggle
-}
-
-// Max speed shake
-if (obj_car.car_speed >= obj_car.car_max_speed - .05) { // almost max
-    needle_jitter = irandom_range(-2, 2);
-}
+obj_car.shift_ready = (current_rpm >= obj_car.shift_rpm && obj_car.gear < obj_car.max_gear);
 //------------------------------------------------------------------------

@@ -1,43 +1,34 @@
 /// @description Insert description here
-// You can write your code in this editor
+// --- Car Speed and Acceleration ---
 car_speed = 0;
-//car_max_speed = 12;
-//car_acceleration = 0.05;
-car_max_speed = global.car_max_speed;
-car_acceleration = global.car_acceleration;
+car_max_speed = global.car_max_speed;      // e.g., 12
+car_acceleration = global.car_acceleration; // e.g., 0.05
 
-// Shifting variables -----------------------------------
-gear = 1;
-max_gear = 4;
-gear_speed_increment = car_max_speed / max_gear;
-//gear_max_speed = gear_speed_increment;
-shift_ready = false;
-gear_percent_thresholds = [0.28, 0.55, 0.8]; // Gear 2, 3, 4 trigger points
+// --- Gear Setup ---
+gear = 1; 
+max_gear = global.max_gear; // 5
 
-gear_speed_thresholds = [];
-for (var i = 0; i < array_length(gear_percent_thresholds); i++) {
-    gear_speed_thresholds[i] = gear_percent_thresholds[i] * car_max_speed;
-}
+// Gear ratios for 5 gears (higher = more torque, lower = more top speed)
+gear_ratios = global.gear_ratios; // [3.0, 2.1, 1.5, 1.2, 1.0]; 
 
-// Set initial gear cap
-gear_max_speed = gear_speed_thresholds[0];
+// Acceleration multipliers for each gear
+gear_accel_multipliers = global.gear_accel_multipliers;// [1.0, 0.8, 0.6, 0.45, 0.3];
 
-gear_accel_multipliers = [1.0, 0.6, 0.4, 0.2]; // One for each gear
+// --- RPM System ---
+current_rpm = 1000;      // idle
+max_rpm = global.max_rpm; // 8000;          // redline
+shift_rpm = global.shift_rpm; //7500;        // upshift trigger
+perfect_shift_window = global.perfect_shift_window; //500; // optional small bonus for perfect timing
 
-
-//-------------------------------------------------------
-
+// --- Physics / state flags ---
 gas_pressed = false;
 shift_pressed = false;
+shift_ready = false;
+car_friction = 0.05;
 
 start_y = y;
 start_x = x;
 
-car_acceleration_base = 0.1;
-car_max_acceleration = 0.2;
-
-car_friction = 0.05;
-
-winner = false;
-
 obj_car.image_index = global.car_selection;
+
+live_results = undefined;

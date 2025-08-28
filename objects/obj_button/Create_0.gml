@@ -3,3 +3,4 @@
 mouse_hover = false;
 randomize();
 //menu_button_pressed = false;
+live_results = undefined;

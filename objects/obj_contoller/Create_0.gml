@@ -1,3 +1,19 @@
+
+//live_init();
+//live_set_host("192.168.1.232"); // PC's local IP
+//live_set_port(9000);             // default port
+
+
+//if (function_exists(live_init)) {
+live_results = undefined;
+    live_init();
+    //gmlive_call_ext("init", "http://192.168.1.232:5100");
+    //live_set_host("192.168.1.232"); // PC IP
+    //live_set_port(9000);            // default GMLive port
+//}
+
+if (live_call()) return live_results;
+
 /// @description Insert description here
 // You can write your code in this editor
 global.start = false;
@@ -58,8 +74,8 @@ needle_jitter = 0;
 var view_w = camera_get_view_width(view_camera[0]);
 var view_h = camera_get_view_height(view_camera[0]);
 
-speedometer_x = view_w - 115;
-speedometer_y = view_h - 375;
+speedometer_x = view_w - 120;
+speedometer_y = view_h - 365;
 speedometer_radius = 100;
 needle_length = 60;
 
@@ -68,7 +84,7 @@ start_angle = 225;  // Bottom left
 end_angle = -45;    // Bottom right
 
 // Tachometer ---
-max_rpm = 8000;
-ideal_shift_rpm = 6500;
-current_rpm = 0;
+max_rpm = global.max_rpm;
+ideal_shift_rpm = global.shift_rpm;
+//current_rpm = 0;
 //--------------------------------------------------------------------

@@ -1,3 +1,4 @@
+if (live_call()) return live_results;
 
 // You can write your code in this editor
 // Get the camera's position and size
@@ -13,6 +14,7 @@ var center_y = view_y + (view_h / 2);
 
 // Draw transparent box
 
+
 // Transparent black box in top quarter of the screen
 // Get camera view info
 var cam = view_camera[0];
@@ -23,7 +25,7 @@ var vh = camera_get_view_height(cam);
 
 // Define box size
 var box_h = vh * 0.25; // 25% of view height
-var box_w = vw * 0.6;
+var box_w = vw * 0.75;
 
 // Center vertically, full width
 var x1 = vx + (vw - box_w) / 2;
@@ -166,6 +168,7 @@ draw_text(view_x + 10, view_y + 50, time_string);
 
 // Draw Tournament Type
 if global.tournament_selection > 0 {
+    //draw_set_alpha(1);
     draw_text(view_x + 10, view_y + 90, global.tournament_type[global.tournament_selection-1]);
 }
 //--------------------------------------------------------------------------------------

@@ -118,17 +118,4 @@ switch button_id
         layer_set_visible("LayerUpgradeMenu", false);
         layer_set_visible("HUD", false);
         break;
-    case 6: // Menu Button on HUD
-        //show_debug_message("finish " + string(global.finish) + " tournament finish: " + string(global.tournament_finish));
-        //if global.finish {
-            //layer_set_visible("LayerMainMenu", true);
-            //layer_set_visible("LayerUpgradeMenu", false);
-            //layer_set_visible("HUD", false);
-            //
-        //
-            //if global.finish {global.finish = false};
-                //
-            //layer_set_visible("RaceFinished", false);
-        //}
-        //break;
 }
